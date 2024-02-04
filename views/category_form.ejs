@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <%- include('sidebar') -%>
+    <main>
+      <h1><%= title %></h1>
+      <form method="POST">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input
+            id="name"
+            class="form-control"
+            type="text"
+            placeholder="Snacks"
+            name="name"
+            required
+            value="<%= typeof category !== 'undefined' ? category.name : '' %>"
+          />
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </main>
+  </body>
+</html>

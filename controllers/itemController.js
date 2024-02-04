@@ -15,12 +15,12 @@ export const item_create_get = asyncHandler(async (req, res) => {
   res.render('item_form', {
     title: 'Create item',
     categories: categories,
+    item: '',
   });
 });
 
 export const item_create_post = [
   asyncHandler(async (req, res, next) => {
-    // Process request after validation and sanitization.
     const item = new Item({
       name: req.body.name,
       description: req.body.description,
@@ -28,14 +28,20 @@ export const item_create_post = [
       price: req.body.price,
       number_in_stock: req.body.number_in_stock,
     });
-    await item.save();
-    res.redirect(item.url);
+    const itemExists = await Category.findOne({
+      name: req.body.name,
+    }).exec();
+    if (itemExists) {
+      // exists, redirect to its detail page.
+      res.redirect(itemExists.url);
+    } else {
+      await item.save();
+      res.redirect(item.url);
+    }
   }),
 ];
 
 export const item_update_get = asyncHandler(async (req, res, next) => {
-  // Get book, authors and genres for form.
-
   const [item, categories] = await Promise.all([
     Item.findById(req.params.id).populate('category').exec(),
     Category.find().sort({ name: 1 }).exec(),
@@ -57,7 +63,6 @@ export const item_update_get = asyncHandler(async (req, res, next) => {
 
 export const item_update_post = [
   asyncHandler(async (req, res, next) => {
-    // Process request after validation and sanitization.
     const item = new Item({
       name: req.body.name,
       description: req.body.description,
@@ -71,7 +76,6 @@ export const item_update_post = [
 ];
 
 export const item_delete_get = asyncHandler(async (req, res, next) => {
-  // Get details of author and all their books (in parallel)
   const item = await Item.findById(req.params.id).populate('category').exec();
 
   if (item === null) {
@@ -85,8 +89,7 @@ export const item_delete_get = asyncHandler(async (req, res, next) => {
   });
 });
 
-// Handle book delete on POST.
 export const item_delete_post = asyncHandler(async (req, res, next) => {
   await Item.findByIdAndDelete(req.body.itemid);
-  res.redirect('/category/items');
+  res.redirect('/category');
 });

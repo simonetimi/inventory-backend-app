@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <%- include('sidebar') -%>
+    <main>
+      <h1><%= title %></h1>
+<form method="POST">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input id="name" class="form-control" type="text" placeholder="Eggplant" name="name" required value="<%= typeof item !== 'undefined' ? item.name : '' %>">
+  </div>
+  <div class="form-group">
+    <label for="category">Category:</label>
+    <select id="category" class="form-control" name="category" required>
+      <option value="">--Please select a category--</option>
+      <% categories.forEach(function(category) { %>
+          <% if (item && category._id.toString() === item.category._id.toString()) { %>
+          <option value="<%= category._id %>" selected><%= category.name %></option>
+            <% } else { %>
+          <option value="<%= category._id %>"><%= category.name %></option>
+            <% } %>
+      <% }); %>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <textarea id="description" class="form-control" placeholder="Description" name="description" minlength="3" required><%= typeof item !== 'undefined' ? item.description : '' %><</textarea>
+  </div>
+  <div class="form-group">
+    <label for="price">Price (€):</label>
+    <input id="price" class="form-control" type="tel" placeholder="20" name="price" min="1" required value="<%= typeof item !== 'undefined' ? item.price : '' %>">
+  </div>
+    <div class="form-group">
+    <label for="number_in_stock">In stock:</label>
+    <input id="number_in_stock" class="form-control" type="tel" placeholder="1" min="0" name="number_in_stock" required <%= typeof item !== 'undefined' ? item.number_in_stock : '' %>>
+  </div>
+  
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+
+    </main>
+  </body>
+</html>

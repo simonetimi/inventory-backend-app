@@ -54,7 +54,7 @@ async function categoryCreate(index, name) {
     name: name,
   });
   await category.save();
-  categories[index];
+  categories[index] = category;
   console.log(`Added category: ${name}`);
 }
 

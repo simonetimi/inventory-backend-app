@@ -9,6 +9,16 @@ import { dirname } from 'path';
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 
+// setup database with .env file
+import 'dotenv/config';
+import mongoose from 'mongoose';
+mongoose.set('strictQuery', false);
+const mongoDB = process.env.MONGO_DB;
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+}
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 

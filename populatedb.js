@@ -7,7 +7,6 @@ import Item from './models/item.js';
 import Category from './models/category.js';
 
 import mongoose from 'mongoose';
-import item from './models/item.js';
 mongoose.set('strictQuery', false);
 
 const items = [];

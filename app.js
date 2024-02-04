@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 import indexRouter from './routes/index.js';
-import inventoryRouter from './routes/inventory.js.js';
+import inventoryRouter from './routes/inventory.js';
 
 // setup database with .env file
 import 'dotenv/config';

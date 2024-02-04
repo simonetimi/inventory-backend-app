@@ -15,10 +15,10 @@ ItemSchema.virtual('url').get(function () {
   return `/inventory/item/${this._id}`;
 });
 
-ItemSchema.virtual('in_stock').get(function () {
+ItemSchema.virtual('is_in_stock').get(function () {
   return this.number_in_stock === 0 ? false : true;
 });
 
 // Export model
-const item = mongoose.model('Item', ItemSchema);
-export default item;
+const Item = mongoose.model('Item', ItemSchema);
+export default Item;

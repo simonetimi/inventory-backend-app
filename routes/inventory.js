@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 /* GET users listing. */
+/*
 router.get(
   '/category/:id',
   'controller link with category id (lists all items in the category)'
@@ -37,5 +38,5 @@ router.post('/item/:id/update', 'controller link that updates item');
 
 router.get('/item/:id/delete', 'controller link with form to delete item');
 router.post('/item/:id/delete', 'controller link that deletes item');
-
+*/
 export default router;
